@@ -4,7 +4,7 @@ import unittest, rostest
 import rosnode, rospy
 import time
 from pimouse_ros.msg import LightSensorValues
-        
+       
 class LightsensorTest(unittest.TestCase):
     def setUp(self):
         self.count = 0
@@ -33,10 +33,10 @@ class LightsensorTest(unittest.TestCase):
         with open("/dev/rtlightsensor0","w") as f: #ダミーの値をダミーのファイルに
             f.write("-1 0 123 4321\n")
 
-            time.sleep(3)
-            ###コールバック関数が最低1回は呼ばれ、値が取得できているかを確認###
-            self.assertFalse(self.count == 0,"cannot subscribe the topic") 
-            self.check_values(4321,123,0,-1) 
+        time.sleep(3)
+        ###コールバック関数が最低1回は呼ばれ、値が取得できているかを確認###
+        self.assertFalse(self.count == 0,"cannot subscribe the topic") 
+        self.check_values(4321,123,0,-1) 
 
     def test_change_parameter(self):
         rospy.set_param('lightsensors_freq',1)    #センサの値取得の周期を1Hzに
